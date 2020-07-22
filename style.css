@@ -1,0 +1,16 @@
+
+body {
+    margin: 0px;
+}
+
+.automataBox {
+    margin-left: 30vw;
+    margin-right: 30vw;
+    width: 40vw;
+}
+
+#canvas {
+    width: 40vw;
+    height: 40vw;
+    background-color: grey;
+}

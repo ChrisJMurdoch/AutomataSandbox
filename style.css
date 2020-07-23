@@ -1,11 +1,14 @@
 
 /* Overrides */
 
-body {
-    margin: 0px;
-    font-size: 2vmin;
+html {
+    font-size: 1.5vmin;
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
+}
+
+body {
+    margin: 0px;
 }
 
 h3 {
@@ -21,7 +24,9 @@ nav {
 }
 nav a {
     height: 1rem;
+    font-size: 1rem;
     margin: 1rem;
+
     display:inline-block;
     line-height: 1em;
     text-decoration: none;
@@ -29,8 +34,8 @@ nav a {
 }
 nav .logo {
     height: 1.6rem;
-    margin: 0.7rem 1rem 0.7rem 1rem;
     font-size: 1.6rem;
+    margin: 0.7rem 1rem 0.7rem 1rem;
 }
 
 main {

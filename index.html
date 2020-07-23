@@ -3,20 +3,65 @@
 <html>
 
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script type="application/javascript" src="automata.js" async></script>
 </head>
 
 <body>
-    <div class="automataBox">
-        <canvas id="canvas" width="80vw" height="80vh"></canvas>
-        <br>
-        <label for="speed">Speed:</label>
-        <input type="range" id="speed" min="1" max="10">
-        <br>
-        <label for="randomise">Randomise:</label>
-        <input type="checkbox" id="randomise" value="Random">
-    </div>
+
+    <nav>
+        <div class="left">
+            <a href="" class="logo">AUTOMATA SANDBOX</a>
+        </div>
+        <div class="left">
+            <a href="">Create</a>
+            <a href="">Learn</a>
+        </div>
+        <div class="right">
+            <a href="">Sign Up</a>
+            <a href="">Log In</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <div class="leftside">
+            <div id="code">
+                code
+            </div>
+            <div id="console">console</div>
+        </div>
+
+        <div class="rightside">
+            <canvas id="canvas"></canvas>
+            <div id="settings">
+
+                <h3>SETTINGS</h3>
+
+                <label for="speed">SPEED: </label>
+                <input type="range" id="speed" min="2" max="25" value="5"><br>
+
+                <hr>
+
+                <h3>NEW GRID</h3>
+
+                <label for="randomise">RANDOMISE INITIAL CELLS: </label>
+                <input type="checkbox" id="randomise" value="Random" checked><br>
+
+                <label for="dimension">DIMENSION: </label>
+                <input type="number" id="dimension" min="1" max="100" value="50"><br>
+
+                <label for="diameter">CELL DETECTION DIAMETER: </label>
+                <input type="number" id="diameter" min="3" max="7" value="3"><br>
+
+                <button type="button" onclick="init()">CREATE</button>
+
+            </div>
+        </div>
+
+    </main>
+
 </body>
 
 </html>

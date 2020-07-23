@@ -10,16 +10,17 @@ let detectionDiameter;
 
 // Core functions
 
-function init( dimension, diameter ) {
-    gridDimension = dimension;
-    detectionDiameter = diameter;
+function init() {
+    gridDimension = document.getElementById("dimension").value;
+    detectionDiameter = document.getElementById("diameter").value;
 
     // Create and populate grid
+    let randomise = document.getElementById("randomise").checked;
     grid = new Array(gridDimension);
     for (let row=0; row<gridDimension; row++) {
         grid[row] = new Array(gridDimension);
         for (let col=0; col<gridDimension; col++) {
-            grid[row][col] = ( Math.random() > 0.9 );
+            grid[row][col] = randomise && ( Math.random() > 0.75 );
         }
     }
 }
@@ -27,8 +28,8 @@ function init( dimension, diameter ) {
 function tick() {
     
     // Sync canvas resolution with css-prompted resizing
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    canvas.width = canvas.clientWidth*2;
+    canvas.height = canvas.clientHeight*2;
 
     // Create alternate grid
     let alt = new Array(gridDimension);
@@ -56,14 +57,18 @@ function tick() {
     // Switch grid
     grid = alt;
 
-    // Draw cells
-    ctx.fillStyle = "grey";
+    // Fill background
+    ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+
+    // Calculate rounded pixel dimensions
+    let stride = canvas.clientWidth / gridDimension * 2;
+    let dim = Math.ceil( canvas.clientWidth / gridDimension ) * 2 + 1;
+
+    // Draw cells
     for (let row=0; row<gridDimension; row++) for (let col=0; col<gridDimension; col++) {
         ctx.fillStyle = grid[row][col] ? "black" : "white";
-        let dim = Math.floor( canvas.clientWidth / gridDimension );
-        let off = ( canvas.clientWidth - Math.floor( canvas.clientWidth / gridDimension ) * gridDimension ) / 2;
-        ctx.fillRect(off+col*dim, off+row*dim, dim-1, dim-1);
+        ctx.fillRect( col*stride, row*stride, dim, dim );
     }
 }
 
@@ -104,6 +109,6 @@ function updateCell( neighbours, detectionDiameter ) {
 
 // Page start
 
-init( 40, 3 );
+init();
 
 loop();

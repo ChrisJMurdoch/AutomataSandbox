@@ -1,16 +1,91 @@
 
+/* Overrides */
+
 body {
     margin: 0px;
+    font-size: 2vmin;
+    color: white;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
-.automataBox {
-    margin-left: 30vw;
-    margin-right: 30vw;
-    width: 40vw;
+h3 {
+    margin: 0.5rem 0rem 0.5rem 0rem;
+}
+
+/* Main elements */
+
+nav {
+    width: 100vw;
+    height: 3rem;
+    background-color: #1f2227;
+}
+nav a {
+    height: 1rem;
+    margin: 1rem;
+    display:inline-block;
+    line-height: 1em;
+    text-decoration: none;
+    color: white;
+}
+nav .logo {
+    height: 1.6rem;
+    margin: 0.7rem 1rem 0.7rem 1rem;
+    font-size: 1.6rem;
+}
+
+main {
+    width: 100vw;
+    height: calc( 100vh - 3rem );
+}
+
+/* Columns */
+
+.leftside {
+    float: left;
+    width: calc( 100% - 50vmin );
+    height: 100%;
+}
+
+.rightside {
+    float: right;
+    width: 50vmin;
+    height: 100%;
+    overflow: hidden;
+    background-color: #1f2227;
+}
+
+/* Sections */
+
+#code {
+    width: 100%;
+    height: 75%;
+    box-sizing: border-box;
+    padding: 1rem;
+    background-color: #2B2F36;
+}
+
+#console {
+    width: 100%;
+    height: 25%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border-right: 2px solid #2B2F36;
+    background-color: #1f2227;
 }
 
 #canvas {
-    width: 40vw;
-    height: 40vw;
-    background-color: grey;
+    width: 50vmin;
+    height: 50vmin;
 }
+
+#settings {
+    width: 100%;
+    height: calc( 100% - 50vmin );
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+/* Common */
+
+.left { float: left; }
+.right { float: right; }

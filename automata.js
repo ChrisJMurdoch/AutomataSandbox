@@ -1,12 +1,24 @@
 
 // Variables
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-
+let canvas, ctx;
 let grid;
 let gridDimension;
 let detectionDiameter;
+let codeMirror;
+
+// Page start
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    init();
+    loop();
+    codeMirror = new CodeMirror.fromTextArea(document.getElementById("codearea"), {
+        lineNumbers: true,
+        theme: "dracula"
+    });
+});
 
 // Core functions
 
@@ -76,39 +88,3 @@ function loop() {
     tick();
     setTimeout( loop, 1000 / document.getElementById("speed").value );
 }
-
-// Custom code
-
-function updateCell( neighbours, detectionDiameter ) {
-
-    // See if this cell is alive
-    let centreIndex = Math.floor(detectionDiameter/2);
-    let cell = neighbours[centreIndex][centreIndex];
-    
-    // Count living neighbours
-    let livingNeighbours = 0;
-    for (let row=0; row<detectionDiameter; row++) for (let col=0; col<detectionDiameter; col++) {
-
-        // Increment if cell is living and not this cell
-        livingNeighbours += neighbours[row][col] && !( row === centreIndex && col === centreIndex );
-    }
-
-    // Conway's rules
-    switch (livingNeighbours) {
-        case 0:
-        case 1:
-            return false; // Die from loneliness
-        case 2:
-            return cell; // Stay the same
-        case 3:
-            return true; // Spring to life
-        default:
-            return false; // Die from overpopulation
-    }
-}
-
-// Page start
-
-init();
-
-loop();

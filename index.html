@@ -3,9 +3,19 @@
 <html>
 
 <head>
+    <!-- Code Mirror -->
+    <script src="codemirror-5.56.0/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="codemirror-5.56.0/lib/codemirror.css">
+    <link rel="stylesheet" href="codemirror-5.56.0/theme/dracula.css">
+    <script src="codemirror-5.56.0/mode/javascript/javascript.js"></script>
+
+    <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- Styles and scripts -->
     <link rel="stylesheet" href="style.css">
-    <script type="application/javascript" src="automata.js" async></script>
+    <script type="application/javascript" src="script.js"></script>
+    <script type="application/javascript" src="automata.js"></script>
 </head>
 
 <body>
@@ -27,14 +37,29 @@
     <main>
 
         <div class="leftside">
+
+            <!-- CODE BOX -->
             <div id="code">
-                code
+                <div class="sectionHeader"><a href="">Code</a></div>
+                <textarea id="codearea">
+function init() {
+    console.log('Hello World!');
+}</textarea>
             </div>
-            <div id="console">console</div>
+
+            <!-- CONSOLE BOX -->
+            <div id="console">
+                console
+            </div>
+
         </div>
 
         <div class="rightside">
+
+            <!-- DISPLAY BOX -->
             <canvas id="canvas"></canvas>
+
+            <!-- SETTINGS BOX -->
             <div id="settings">
 
                 <h3>SETTINGS</h3>
@@ -45,7 +70,6 @@
                 <hr>
 
                 <h3>NEW GRID</h3>
-
                 <label for="randomise">RANDOMISE INITIAL CELLS: </label>
                 <input type="checkbox" id="randomise" value="Random" checked><br>
 
@@ -58,6 +82,7 @@
                 <button type="button" onclick="init()">CREATE</button>
 
             </div>
+
         </div>
 
     </main>

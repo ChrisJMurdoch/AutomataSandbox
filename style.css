@@ -18,7 +18,7 @@ h3 {
 /* Main elements */
 
 nav {
-    width: 100vw;
+    width: 100%;
     height: 3rem;
     background-color: #1f2227;
 }
@@ -39,7 +39,7 @@ nav .logo {
 }
 
 main {
-    width: 100vw;
+    width: 100%;
     height: calc( 100vh - 3rem );
 }
 
@@ -59,14 +59,38 @@ main {
     background-color: #1f2227;
 }
 
+/* Section decoration */
+
+.sectionHeader {
+    width: 100%;
+    height: 2rem;
+    background-color: #262a30;
+}
+.sectionHeader a {
+    height: 1rem;
+    font-size: 1rem;
+    margin: 0.5rem;
+
+    display:inline-block;
+    line-height: 1em;
+    text-decoration: none;
+    color: white;
+}
+
 /* Sections */
 
 #code {
     width: 100%;
     height: 75%;
-    box-sizing: border-box;
-    padding: 1rem;
     background-color: #2B2F36;
+}
+#codearea {
+    width: 90%;
+    height: 90%;
+    background-color: wheat;
+}
+#code .CodeMirror {
+    background-color: transparent;
 }
 
 #console {

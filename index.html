@@ -6,13 +6,13 @@
     <!-- Code Mirror -->
     <script src="codemirror-5.56.0/lib/codemirror.js"></script>
     <link rel="stylesheet" href="codemirror-5.56.0/lib/codemirror.css">
-    <link rel="stylesheet" href="codemirror-5.56.0/theme/dracula.css">
     <script src="codemirror-5.56.0/mode/javascript/javascript.js"></script>
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 
     <!-- Styles and scripts -->
+    <link rel="stylesheet" href="nebula.css">
     <link rel="stylesheet" href="style.css">
     <script type="application/javascript" src="script.js"></script>
     <script type="application/javascript" src="automata.js"></script>
@@ -40,11 +40,11 @@
 
             <!-- CODE BOX -->
             <div id="code">
-                <div class="sectionHeader"><a href="">Code</a></div>
-                <textarea id="codearea">
-function init() {
-    console.log('Hello World!');
-}</textarea>
+                <span style="color: #CC7832; font-weight: bold;">function</span>
+                <span style="color: #A9B7C6; font-style: italic;">updateCell(neighbours)</span>
+                <span style="color: #A9B7C6;">{</span>
+                <div id="codearea"></div>
+                <span style="color: #A9B7C6;">}</span>
             </div>
 
             <!-- CONSOLE BOX -->
@@ -64,20 +64,14 @@ function init() {
 
                 <h3>SETTINGS</h3>
 
-                <label for="speed">SPEED: </label>
-                <input type="range" id="speed" min="2" max="25" value="5"><br>
+                <label for="speed">SPEED</label>
+                <input type="range" id="speed" min="2" max="25" value="1"><br>
 
                 <hr>
 
                 <h3>NEW GRID</h3>
-                <label for="randomise">RANDOMISE INITIAL CELLS: </label>
+                <label for="randomise">RANDOMISE INITIAL CELLS</label>
                 <input type="checkbox" id="randomise" value="Random" checked><br>
-
-                <label for="dimension">DIMENSION: </label>
-                <input type="number" id="dimension" min="1" max="100" value="50"><br>
-
-                <label for="diameter">CELL DETECTION DIAMETER: </label>
-                <input type="number" id="diameter" min="3" max="7" value="3"><br>
 
                 <button type="button" onclick="init()">CREATE</button>
 

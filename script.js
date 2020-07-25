@@ -1,27 +1,23 @@
-function updateCell( neighbours, detectionDiameter ) {
+/**
+ * @param {string} somebody - Somebody's name.
+ */
+function updateCell(detectionDiameter, neighbours) {
 
-    // See if this cell is alive
-    let centreIndex = Math.floor(detectionDiameter/2);
-    let cell = neighbours[centreIndex][centreIndex];
-    
-    // Count living neighbours
-    let livingNeighbours = 0;
-    for (let row=0; row<detectionDiameter; row++) for (let col=0; col<detectionDiameter; col++) {
-
-        // Increment if cell is living and not this cell
-        livingNeighbours += neighbours[row][col] && !( row === centreIndex && col === centreIndex );
-    }
+    // Count living neighbours minus self
+    let livingNeighbours = -neighbours[1][1];
+    neighbours.forEach( row => row.forEach( cell => livingNeighbours += cell ) );
 
     // Conway's rules
     switch (livingNeighbours) {
-        case 0:
-        case 1:
-            return false; // Die from loneliness
-        case 2:
-            return cell; // Stay the same
-        case 3:
-            return true; // Spring to life
-        default:
-            return false; // Die from overpopulation
+    case 0:
+    case 1:
+        return 0; // Die from loneliness
+    case 2:
+        return neighbours[1][1]; // Stay the same
+    case 3:
+        return 1; // Spring to life
+    default:
+        return 0; // Die from overpopulation
     }
+
 }

@@ -1,9 +1,13 @@
 
+"use strict";
+
 // Variables
 
 let canvas, ctx; // Canvas object and context
 let codeMirror; // Text editor object
 let grid, gridDimension = 50; // 2D value grid
+
+let conX, conY; // console.log data
 
 // Page load
 
@@ -20,6 +24,46 @@ document.addEventListener("DOMContentLoaded", function(event) {
     loop();
 });
 
+// Console forwarding
+
+function screenLog(message, stamp) {
+
+    const tray = document.getElementById("consoleTray")
+
+    // Create entry
+    let entry = document.createElement("div");
+    entry.classList.add("consoleEntry");
+
+    // Create stamp
+    if ( stamp ) {
+        let st = document.createElement("div");
+        st.classList.add("consoleStamp");
+        st.appendChild( document.createTextNode("CELL[" + conX + "]" + "[" + conY + "]") );
+        entry.append( st );
+    }
+
+    // Create text
+    let node = document.createElement("div");
+    node.classList.add("consoleMessage");
+    node.appendChild( document.createTextNode(message) );
+    entry.append( node );
+
+    // Add to top of tray
+    tray.prepend( entry );
+
+    // Manage overflow
+    if ( tray.childElementCount > 25 )
+        tray.removeChild(tray.lastChild);
+}
+
+console.log = function(message) {
+    screenLog( message, true );
+}
+
+console.err = function(message) {
+    console.log( message, true );
+}
+
 // Core functions
 
 function init() {
@@ -34,7 +78,7 @@ function init() {
 }
 
 function loop() {
-    tick( 100 );
+    tick( 1000 ); // 1 Second time limit
     setTimeout( loop, 1000 / document.getElementById("speed").value );
 }
 
@@ -42,20 +86,18 @@ function tick( timeLimit ) {
     
     let start = Date.now();
 
-    // Read CodeMirror to function
-    let func;
+    // Parse CodeMirror text to function
     try {
-        let body = codeMirror.getValue();
-        func = new Function( "neighbours", body );
+        var func = new Function( "neighbours", codeMirror.getValue() );
     } catch(e) {
-        console.log("invalid function");
-        console.log(e);
+        screenLog(e);
         return;
     }
 
     // Sync canvas resolution with css-prompted resizing
-    canvas.width = canvas.clientWidth*2;
-    canvas.height = canvas.clientHeight*2;
+    let SSAA = document.getElementById("SSAA").checked ? 2 : 1;
+    canvas.width = canvas.clientWidth*SSAA;
+    canvas.height = canvas.clientHeight*SSAA;
 
     // Create alternate grid
     let alt = new Array(gridDimension);
@@ -78,16 +120,17 @@ function tick( timeLimit ) {
 
         // Update cell
         try {
+            conX = col;
+            conY = row;
             alt[row][col] = func( neighbours );
         } catch(e) {
-            console.log("runtime failure");
             console.log(e);
             return;
         }
 
         // Check time limit
         if ( Date.now() - start > timeLimit ) {
-            console.log("tick timed out");
+            console.log("Tick timed out!");
             return;
         }
     }
@@ -96,8 +139,8 @@ function tick( timeLimit ) {
     grid = alt;
 
     // Calculate rounded pixel dimensions
-    let stride = canvas.clientWidth / gridDimension * 2;
-    let dim = Math.ceil( canvas.clientWidth / gridDimension ) * 2 + 1;
+    let stride = canvas.clientWidth / gridDimension * SSAA;
+    let dim = ( Math.ceil( canvas.clientWidth / gridDimension ) * SSAA ) + 1;
 
     // Draw cells
     for (let row=0; row<gridDimension; row++) for (let col=0; col<gridDimension; col++) {

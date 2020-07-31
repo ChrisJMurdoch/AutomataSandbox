@@ -15,6 +15,18 @@ h3 {
     margin: 0.5rem 0rem 0.5rem 0rem;
 }
 
+hr {
+    border: 1px solid #3f4550;
+}
+
+*::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #2B2F36;
+}
+
 /* Main elements */
 
 nav {
@@ -59,24 +71,6 @@ main {
     background-color: #1f2227;
 }
 
-/* Section decoration */
-
-.sectionHeader {
-    width: 100%;
-    height: 2rem;
-    background-color: #262a30;
-}
-.sectionHeader a {
-    height: 1rem;
-    font-size: 1rem;
-    margin: 0.5rem;
-
-    display:inline-block;
-    line-height: 1em;
-    text-decoration: none;
-    color: white;
-}
-
 /* Sections */
 
 #code {
@@ -94,7 +88,6 @@ main {
 .CodeMirror {
     height: auto;
 }
-
 .CodeMirror-lines {
     padding: 0;
 }
@@ -106,6 +99,24 @@ main {
     padding: 1rem;
     border-right: 2px solid #2B2F36;
     background-color: #1f2227;
+    overflow: hidden;
+}
+#consoleTray {
+    height: 90%;
+    overflow-y: scroll;
+}
+.consoleEntry {
+    padding: 0.25rem;
+    border-bottom: 1px solid #2B2F36;
+}
+.consoleStamp {
+    display: inline-block;
+    color: dimgrey;
+    margin-right: 1rem;
+}
+.consoleMessage {
+    display: inline-block;
+    color: lightgrey;
 }
 
 #canvas {

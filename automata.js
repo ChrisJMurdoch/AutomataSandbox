@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     codeMirror = new CodeMirror(document.getElementById("codearea"), {
         viewportMargin: Infinity,
         lineNumbers: true,
+        indentUnit: 4,
         theme: "nebula",
     });
     loadSample("game_of_life");
@@ -72,7 +73,7 @@ function reset() {
     const randomise = document.getElementById("randomise").checked;
     for (let row=0; row<gridDimension; row++)
         for (let col=0; col<gridDimension; col++)
-            grid[row][col] = randomise && ( Math.random() > 0.5 );
+            grid[row][col] = randomise && ( Math.random() > 0.5 ) ? 1 : 0;
 }
 
 function repeat() {
@@ -111,7 +112,7 @@ function tick() {
         screenLog(e);
         return;
     }
-
+    
     // Create alternate grid
     let alt = new Array(gridDimension);
     for (let i=0; i<gridDimension; i++)
@@ -127,7 +128,7 @@ function tick() {
             for (let x=0; x<3; x++) {
                 let nx = col - 1 + x;
                 let ny = row - 1 + y;
-                neighbours[y][x] = (nx>=0) && (ny>=0) && (nx<gridDimension) && (ny<gridDimension) ? grid[ny][nx] : false;
+                neighbours[y][x] = (nx>=0) && (ny>=0) && (nx<gridDimension) && (ny<gridDimension) && !Array.isArray(grid[ny][nx]) ? grid[ny][nx] : null;
             }
         }
 
@@ -135,18 +136,21 @@ function tick() {
         try {
             conX = col;
             conY = row;
-            alt[row][col] = func( neighbours );
+            const val = func( neighbours );
+            if (val===null)
+                throw "Cannot return null"
+            alt[row][col] = val;
         } catch(e) {
             console.log(e);
             return;
         }
     }
 
+    // Paint canvas
+    render(ctx);
+
     // Switch grid
     grid = alt;
-
-    // Repaint canvas
-    render(ctx);
 }
 
 function render(ctx) {

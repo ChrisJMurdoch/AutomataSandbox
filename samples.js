@@ -3,25 +3,33 @@ const samples = {
 
 game_of_life:
 `
+const DEAD = 0, ALIVE = 1;
+
 // Count living neighbours minus self
 let livingNeighbours = -neighbours[1][1];
 neighbours.forEach( row => row.forEach( cell => livingNeighbours += cell ) );
 
-// Conway's rules
 switch (livingNeighbours) {
     case 0:
     case 1:
-        return false; // Die from underpopulation
+        return DEAD; // Die from underpopulation
     case 2:
         return neighbours[1][1]; // Stay the same
     case 3:
-        return true; // Spring to life
+        return ALIVE; // Spring to life
     default:
-        return false; // Die from overpopulation
+        return DEAD; // Die from overpopulation
 }`,
 
-white_noise:
+falling_blocks:
 `
-return Math.random() < 0.5;`
+const AIR = 0, BLOCK = 1;
+
+switch(neighbours[1][1]) {
+    case AIR:
+        return neighbours[0][1]==BLOCK ? BLOCK : AIR; // Fill from above or stay the same
+    case BLOCK:
+        return neighbours[2][1]==AIR ? AIR : BLOCK; // Fall below or stay the same
+}`
 
 };

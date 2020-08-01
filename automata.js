@@ -47,10 +47,10 @@ function screenLog(message, stamp) {
 document.addEventListener("DOMContentLoaded", function(event) { 
     codeMirror = new CodeMirror(document.getElementById("codearea"), {
         viewportMargin: Infinity,
-        value: samples_GoL,
         lineNumbers: true,
         theme: "nebula",
     });
+    loadSample("game_of_life");
     init();
     reset();
     repeat();
@@ -154,4 +154,8 @@ function render(ctx) {
             ctx.fillRect( xPix, yPix, xDim, yDim );
         }
     }
+}
+
+function loadSample(sample) {
+    codeMirror.setValue(samples[sample]);
 }

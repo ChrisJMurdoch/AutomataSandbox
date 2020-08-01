@@ -3,28 +3,14 @@
 
 // Variables
 
-let canvas, ctx; // Canvas object and context
 let codeMirror; // Text editor object
 let grid, gridDimension = 50; // 2D value grid
-
-let conX, conY; // console.log data
-
-// Page load
-
-document.addEventListener("DOMContentLoaded", function(event) { 
-    canvas = document.getElementById("canvas");
-    ctx = canvas.getContext("2d");
-    codeMirror = new CodeMirror(document.getElementById("codearea"), {
-        value: "\n// Count living neighbours minus self\nlet livingNeighbours = -neighbours[1][1];\nneighbours.forEach( row => row.forEach( cell => livingNeighbours += cell ) );\n\n// Conway's rules\nswitch (livingNeighbours) {\n\tcase 0:\n\tcase 1:\n\t\treturn 0; // Die from loneliness\n\tcase 2:\n\t\treturn neighbours[1][1]; // Stay the same\n\tcase 3:\n\t\treturn 1; // Spring to life\n\tdefault:\n\t\treturn 0; // Die from overpopulation\n}",
-        lineNumbers: true,
-        theme: "nebula",
-        viewportMargin: Infinity
-    });
-    init();
-    loop();
-});
+let conX, conY; // console.log cell data
 
 // Console forwarding
+
+console.log = function(message) { screenLog( message, true ); }
+console.err = function(message) { screenLog( message, true ); }
 
 function screenLog(message, stamp) {
 
@@ -32,19 +18,19 @@ function screenLog(message, stamp) {
 
     // Create entry
     let entry = document.createElement("div");
-    entry.classList.add("consoleEntry");
+    entry.className = "consoleEntry";
 
     // Create stamp
     if ( stamp ) {
         let st = document.createElement("div");
-        st.classList.add("consoleStamp");
+        st.className = "consoleStamp";
         st.appendChild( document.createTextNode("CELL[" + conX + "]" + "[" + conY + "]") );
         entry.append( st );
     }
 
     // Create text
     let node = document.createElement("div");
-    node.classList.add("consoleMessage");
+    node.className = "consoleMessage";
     node.appendChild( document.createTextNode(message) );
     entry.append( node );
 
@@ -56,36 +42,45 @@ function screenLog(message, stamp) {
         tray.removeChild(tray.lastChild);
 }
 
-console.log = function(message) {
-    screenLog( message, true );
-}
+// Page load
 
-console.err = function(message) {
-    console.log( message, true );
-}
+document.addEventListener("DOMContentLoaded", function(event) { 
+    codeMirror = new CodeMirror(document.getElementById("codearea"), {
+        viewportMargin: Infinity,
+        value: samples_GoL,
+        lineNumbers: true,
+        theme: "nebula",
+    });
+    init();
+    reset();
+    repeat();
+});
 
 // Core functions
 
 function init() {
-    let randomise = document.getElementById("randomise").checked;
     grid = new Array(gridDimension);
-    for (let row=0; row<gridDimension; row++) {
+    for (let row=0; row<gridDimension; row++)
         grid[row] = new Array(gridDimension);
-        for (let col=0; col<gridDimension; col++) {
-            grid[row][col] = randomise && ( Math.random() > 0.75 );
-        }
-    }
 }
 
-function loop() {
-    tick( 1000 ); // 1 Second time limit
-    setTimeout( loop, 1000 / document.getElementById("speed").value );
+function reset() {
+    const randomise = document.getElementById("randomise").checked;
+    for (let row=0; row<gridDimension; row++)
+        for (let col=0; col<gridDimension; col++)
+            grid[row][col] = randomise && ( Math.random() > 0.5 );
 }
 
-function tick( timeLimit ) {
+function repeat() {
+    tick();
+    setTimeout( repeat, 1000 / document.getElementById("speed").value );
+}
+
+function tick() {
+
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
     
-    let start = Date.now();
-
     // Parse CodeMirror text to function
     try {
         var func = new Function( "neighbours", codeMirror.getValue() );
@@ -93,11 +88,6 @@ function tick( timeLimit ) {
         screenLog(e);
         return;
     }
-
-    // Sync canvas resolution with css-prompted resizing
-    let SSAA = document.getElementById("SSAA").checked ? 2 : 1;
-    canvas.width = canvas.clientWidth*SSAA;
-    canvas.height = canvas.clientHeight*SSAA;
 
     // Create alternate grid
     let alt = new Array(gridDimension);
@@ -127,20 +117,26 @@ function tick( timeLimit ) {
             console.log(e);
             return;
         }
-
-        // Check time limit
-        if ( Date.now() - start > timeLimit ) {
-            console.log("Tick timed out!");
-            return;
-        }
     }
 
     // Switch grid
     grid = alt;
 
+    // Repaint canvas
+    render(ctx);
+}
+
+function render(ctx) {
+
+    const SSAA = document.getElementById("SSAA").checked ? 2 : 1;
+    
+    // Sync canvas resolution with size
+    canvas.width = canvas.clientWidth*SSAA;
+    canvas.height = canvas.clientHeight*SSAA;
+
     // Calculate rounded pixel dimensions
-    let stride = canvas.clientWidth / gridDimension * SSAA;
-    let dim = ( Math.ceil( canvas.clientWidth / gridDimension ) * SSAA ) + 1;
+    let stride = canvas.clientWidth*SSAA / gridDimension;
+    let dim = Math.ceil(stride) + 1;
 
     // Draw cells
     for (let row=0; row<gridDimension; row++) for (let col=0; col<gridDimension; col++) {

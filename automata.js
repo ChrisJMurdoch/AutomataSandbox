@@ -134,13 +134,24 @@ function render(ctx) {
     canvas.width = canvas.clientWidth*SSAA;
     canvas.height = canvas.clientHeight*SSAA;
 
-    // Calculate rounded pixel dimensions
-    let stride = canvas.clientWidth*SSAA / gridDimension;
-    let dim = Math.ceil(stride) + 1;
+    // Resolution-adjusted, non-integer cell dimension
+    const stride = canvas.width / gridDimension;
 
-    // Draw cells
-    for (let row=0; row<gridDimension; row++) for (let col=0; col<gridDimension; col++) {
-        ctx.fillStyle = grid[row][col] ? "black" : "white";
-        ctx.fillRect( col*stride, row*stride, dim, dim );
+    // Each row
+    for (let row=0; row<gridDimension; row++) {
+        
+        // Floor pixel position and height
+        const yPix = Math.floor( row*stride ), yDim = Math.floor( (row+1)*stride ) - yPix;
+
+        // Each cell
+        for (let col=0; col<gridDimension; col++) {
+
+            // Floor pixel position and width
+            const xPix = Math.floor( col*stride ), xDim = Math.floor( (col+1)*stride ) - xPix;
+
+            // Fill square
+            ctx.fillStyle = grid[row][col] ? "black" : "white";
+            ctx.fillRect( xPix, yPix, xDim, yDim );
+        }
     }
 }

@@ -62,11 +62,8 @@
 
                 <h3>SETTINGS</h3>
 
-                <label for="speed">SPEED</label>
-                <input type="range" id="speed" min="2" max="25" value="1"><br>
-
-                <label for="SSAA">Anti-Aliasing (SSAA)</label>
-                <input type="checkbox" id="SSAA"><br>
+                <label for="tickPeriod">SPEED</label>
+                <input type="range" id="tickPeriod" min="0" max="1000" value="500" step="0.1"><br>
 
                 <hr>
 
@@ -75,6 +72,19 @@
                 <input type="checkbox" id="randomise" checked><br>
 
                 <button type="button" onclick="reset()">CREATE</button>
+
+                <hr>
+
+                <h3>ADVANCED</h3>
+
+                <div class="flex">
+                    <div id="target"></div>
+                    <div class="gap"></div>
+                    <div id="framerate"></div>
+                </div>
+
+                <label for="SSAA">2xSSAA</label>
+                <input type="checkbox" id="SSAA"><br>
 
             </div>
 

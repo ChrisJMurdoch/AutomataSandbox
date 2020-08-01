@@ -24,7 +24,7 @@ function screenLog(message, stamp) {
     if ( stamp ) {
         let st = document.createElement("div");
         st.className = "consoleStamp";
-        st.appendChild( document.createTextNode("CELL[" + conX + "]" + "[" + conY + "]") );
+        st.appendChild( document.createTextNode("CELL[" + conY + "]" + "[" + conX + "]") );
         entry.append( st );
     }
 

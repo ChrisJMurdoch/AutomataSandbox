@@ -27,6 +27,7 @@
         <div class="left">
             <button type="button" onclick="loadSample('game_of_life')">Game of Life</button>
             <button type="button" onclick="loadSample('falling_blocks')">Falling Blocks</button>
+            <button type="button" onclick="loadSample('falling_sand')">Falling Sand</button>
         </div>
     </nav>
 
@@ -63,7 +64,10 @@
                 <h3>SETTINGS</h3>
 
                 <label for="tickPeriod">SPEED</label>
-                <input type="range" id="tickPeriod" min="0" max="1000" value="500" step="0.1"><br>
+                <input type="range" id="tickPeriod" min="0" max="1000" value="950" step="0.1"><br>
+
+                <label for="persistent">PERSISTENT GRID</label>
+                <input type="checkbox" id="persistent"><br>
 
                 <hr>
 

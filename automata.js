@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         indentUnit: 4,
         theme: "nebula",
     });
-    loadSample("game_of_life");
     init();
+    loadSample("game_of_life");
     reset();
     repeat();
 });
@@ -184,5 +184,7 @@ function render(ctx) {
 }
 
 function loadSample(sample) {
+    if ( !document.getElementById("persistent").checked )
+        reset();
     codeMirror.setValue(samples[sample]);
 }

@@ -7,7 +7,6 @@ let codeMirror; // Text editor object
 let grid, gridDimension = 100; // 2D value grid
 let conX, conY; // console.log cell data
 let lastTick // Time of last tick start
-let frameTimes, ftSize = 10, ftIndex = 0; // Used to calculate average framerate
 
 // Console forwarding
 
@@ -70,8 +69,6 @@ function init() {
     grid = new Array(gridDimension);
     for (let row=0; row<gridDimension; row++)
         grid[row] = new Array(gridDimension);
-    frameTimes = new Array(ftSize);
-    frameTimes.fill(500);
 }
 
 function reset() {
@@ -88,16 +85,6 @@ function repeat() {
 
         // Record tick
         lastTick = Date.now();
-        frameTimes[ftIndex++] = delta || 500;
-        ftIndex %= ftSize;
-
-        // Display tick
-        let sum = 0;
-        frameTimes.forEach( time => sum += time );
-        const target = 1000 / (1000-document.getElementById("tickPeriod").value);
-        const fr = (1000*ftSize) / sum
-        document.getElementById("target").innerHTML = "Target: " + target.toFixed(2) + "Hz";
-        document.getElementById("framerate").innerHTML = "Actual: " + fr.toFixed(2) + "Hz (" + (fr*100/target).toFixed(1) + "%)";
         tick();
     }
 
@@ -160,7 +147,7 @@ function tick() {
 
 function render(ctx) {
 
-    const SSAA = document.getElementById("SSAA").checked ? 2 : 1;
+    const SSAA = 1;
     
     // Sync canvas resolution with size
     canvas.width = canvas.clientWidth*SSAA;

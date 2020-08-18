@@ -61,6 +61,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // Core functions
 
+function toggle(id) {
+    let style = document.getElementById(id).style;
+    style.visibility = style.visibility=="hidden" ? "visible" : "hidden";
+}
+
 function init() {
     grid = new Array(gridDimension);
     for (let row=0; row<gridDimension; row++)
@@ -70,7 +75,7 @@ function init() {
 }
 
 function reset() {
-    const randomise = document.getElementById("randomise").checked;
+    const randomise = true; // TODO
     for (let row=0; row<gridDimension; row++)
         for (let col=0; col<gridDimension; col++)
             grid[row][col] = randomise && ( Math.random() > 0.5 ) ? 1 : 0;

@@ -29,9 +29,40 @@
             <button type="button" onclick="loadSample('falling_blocks')">Falling Blocks</button>
             <button type="button" onclick="loadSample('falling_sand')">Falling Sand</button>
         </div>
+        <div class="right">
+            <button type="button" onclick="toggle('helpbox')">?</button>
+        </div>
     </nav>
 
     <main>
+
+        <!-- HELP BOX -->
+        <div id="helpbox" style="color: lightgrey;">
+
+            <button class="right" onclick="toggle('helpbox')">X</button>
+
+            <h1 style="text-align: center; color: white;">HOW TO USE</h1>
+            <p>
+                Welcome to Automata Sandbox!  Here you'll find the tools to learn about and create your own 
+                cellular automata.
+            </p>
+
+            <h3 style="color: white;">CODE EXAMPLES</h3>
+            <p>
+                Click on the buttons at the top of the page to load example code into the editor and watch it 
+                come to life.  You can edit any of the examples and watch the world change in real time.
+            </p>
+            <p>
+                Any errors in your code will pause the execution and display in the console at the bottom of 
+                the screen.
+            </p>
+
+            <h3 style="color: white;">PERSISTENT GRID</h3>
+            <p>
+                This option tells the grid whether or not to reset when switching examples.  When it's on, you 
+                can play around with different rulesets. Try: Game of Life > Falling Blocks > Falling Sand!
+            </p>
+        </div>
 
         <div class="leftside">
 
@@ -72,8 +103,6 @@
                 <hr>
 
                 <h3>NEW GRID</h3>
-                <label for="randomise">RANDOMISE INITIAL CELLS</label>
-                <input type="checkbox" id="randomise" checked><br>
 
                 <button type="button" onclick="reset()">CREATE</button>
 

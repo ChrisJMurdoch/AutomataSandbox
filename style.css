@@ -19,6 +19,12 @@ hr {
     border: 1px solid #3f4550;
 }
 
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 button {
     height: 1.6rem;
     margin: 0.7rem;
@@ -122,6 +128,21 @@ main {
 
 /* Sections */
 
+#helpbox {
+    position: absolute;
+    left: 20%;
+    top: 10%;
+    width: 60%;
+    height: 80%;
+    padding: 1rem;
+    z-index: 101;
+    border-radius: 1rem;
+    border: 2px solid orange;
+    background-color: #1f2227;
+    overflow: hidden;
+    font-size: 1.5rem;
+}
+
 #code {
     width: 100%;
     height: 75%;
@@ -129,6 +150,7 @@ main {
     box-sizing: border-box;
     background-color: #2B2F36;
     font-family: Consolas, Menlo, Monaco, "Lucida Console";
+    font-size: 1.2rem;
 }
 #codearea {
     width: 100%;
@@ -184,5 +206,18 @@ main {
 
 .gap { width: 2rem }
 .flex { display: flex; }
+
 .left { float: left; }
 .right { float: right; }
+
+.w25p { width: 25%; }
+.w40p { width: 40%; }
+.w50p { width: 50%; }
+.w60p { width: 60%; }
+.w75p { width: 75%; }
+.w100p { width: 100%; }
+
+.h25p { height: 25%; }
+.h50p { height: 50%; }
+.h75p { height: 75%; }
+.h100p { height: 100%; }

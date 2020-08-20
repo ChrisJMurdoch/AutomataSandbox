@@ -5,6 +5,7 @@ html {
     color: white;
     font-size: 1.5vh;
     font-family: 'Roboto Condensed', sans-serif;
+    overflow: hidden;
 }
 
 body {
@@ -90,7 +91,7 @@ nav * {
     text-decoration: none;
     color: white;
     font-size: 1rem;
-    line-height: 1rem;
+    line-height: 1em;
 }
 nav a {
     height: 1rem;
@@ -143,16 +144,16 @@ main {
     #code {
         top: calc( 3rem + 50vw );
         width: 100vw;
-        height: calc( 75vh - 3rem - 50vw );
+        height: calc( ( 100vh - 3rem - 50vw ) * 0.75 );
     }
 }
 #codearea {
     width: 100%;
-    height: calc( 100% - 3rem );
+    height: 100%;
 }
 .CodeMirror {
     width: 100%;
-    height: 100%;
+    height: calc( 100% - 3rem );
 }
 .CodeMirror-lines {
     padding: 0;
@@ -178,7 +179,7 @@ main {
     #console {
         bottom: 0px;
         width: 100vw;
-        height: 25vh;
+        height: calc( ( 100vh - 3rem - 50vw ) * 0.25 );
     }
 }
 #consoleTray {

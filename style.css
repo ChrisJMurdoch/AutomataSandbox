@@ -3,7 +3,7 @@
 
 html {
     color: white;
-    font-size: 1.5vmin;
+    font-size: 1.5vh;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -90,7 +90,7 @@ nav * {
     text-decoration: none;
     color: white;
     font-size: 1rem;
-    line-height: 1em;
+    line-height: 1rem;
 }
 nav a {
     height: 1rem;
@@ -108,32 +108,15 @@ main {
     height: calc( 100vh - 3rem );
 }
 
-/* Columns */
-
-.leftside {
-    position: absolute;
-    left: 0px;
-    width: calc( 100% - 50vmin );
-    height: calc( 100vh - 3rem );
-}
-
-.rightside {
-    position: absolute;
-    right: 0px;
-    width: 50vmin;
-    height: calc( 100vh - 3rem );
-    overflow: hidden;
-    background-color: #1f2227;
-}
-
 /* Sections */
 
 #helpbox {
     position: absolute;
-    left: 20%;
-    top: 10%;
-    width: 60%;
-    height: 80%;
+    left: 15%;
+    top: 15%;
+    width: 70%;
+    
+    box-sizing: border-box;
     padding: 1rem;
     z-index: 101;
     border-radius: 1rem;
@@ -144,33 +127,59 @@ main {
 }
 
 #code {
-    width: 100%;
-    height: 75%;
-    padding: 1em;
+    position: absolute;
+    left: 0px;
+    top: 3rem;
+    width: calc( 100vw - 50vh );
+    height: calc( ( 100vh - 3rem ) * 0.75 );
+
     box-sizing: border-box;
+    padding: 1rem;
     background-color: #2B2F36;
     font-family: Consolas, Menlo, Monaco, "Lucida Console";
     font-size: 1.2rem;
 }
+@media (orientation: portrait) {
+    #code {
+        top: calc( 3rem + 50vw );
+        width: 100vw;
+        height: calc( 75vh - 3rem - 50vw );
+    }
+}
 #codearea {
     width: 100%;
-    height: auto;
+    height: calc( 100% - 3rem );
 }
 .CodeMirror {
-    height: auto;
+    width: 100%;
+    height: 100%;
 }
 .CodeMirror-lines {
     padding: 0;
 }
+.CodeMirror-scrollbar-filler { /* scrollbar intersect */
+    background-color: #2B2F36;
+}
 
 #console {
-    width: 100%;
-    height: 25%;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: calc( 100vw - 50vh );
+    height: calc( ( 100vh - 3rem ) * 0.25 );
+
     box-sizing: border-box;
     padding: 1rem;
     border-right: 2px solid #2B2F36;
     background-color: #1f2227;
     overflow: hidden;
+}
+@media (orientation: portrait) {
+    #console {
+        bottom: 0px;
+        width: 100vw;
+        height: 25vh;
+    }
 }
 #consoleTray {
     height: 90%;
@@ -191,15 +200,39 @@ main {
 }
 
 #canvas {
-    width: 50vmin;
-    height: 50vmin;
+    position: absolute;
+    right: 0px;
+    top: 3rem;
+    width: 50vh;
+    height: 50vh;
+}
+@media (orientation: portrait) {
+    #canvas {
+        right: 0px;
+        top: 3rem;
+        width: 50vw;
+        height: 50vw;
+    }
 }
 
 #settings {
-    width: 100%;
-    height: calc( 100% - 50vmin );
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 50vh;
+    height: calc( 50vh - 3rem );
+
     box-sizing: border-box;
     padding: 1rem;
+    background-color: #1f2227;
+}
+@media (orientation: portrait) {
+    #settings {
+        left: 0px;
+        top: 3rem;
+        width: 50vw;
+        height: 50vw;
+    }
 }
 
 /* Common */

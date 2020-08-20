@@ -73,45 +73,37 @@
             </p>
         </div>
 
-        <div class="leftside">
-
-            <!-- Codebox -->
-            <div id="code">
-                <span style="color: #CC7832; font-weight: bold;">function</span>
-                <span style="color: #A9B7C6; font-style: italic;">updateCell(neighbours)</span>
-                <span style="color: #A9B7C6;">{</span>
-                <div id="codearea"></div>
-                <span style="color: #A9B7C6;">}</span>
-            </div>
-
-            <!-- Console -->
-            <div id="console">
-                CONSOLE
-                <hr>
-                <div id="consoleTray"></div>
-            </div>
-
+        <!-- Codebox -->
+        <div id="code">
+            <span style="color: #CC7832; font-weight: bold;">function</span>
+            <span style="color: #A9B7C6; font-style: italic;">updateCell(neighbours)</span>
+            <span style="color: #A9B7C6;">{</span>
+            <div id="codearea"></div>
+            <span style="color: #A9B7C6;">}</span>
         </div>
 
-        <div class="rightside">
+        <!-- Console -->
+        <div id="console">
+            CONSOLE
+            <hr>
+            <div id="consoleTray"></div>
+        </div>
 
-            <!-- Display -->
-            <canvas id="canvas"></canvas>
+        <!-- Display -->
+        <canvas id="canvas"></canvas>
 
-            <!-- Settings -->
-            <div id="settings">
+        <!-- Settings -->
+        <div id="settings">
 
-                <h2>SETTINGS</h2>
+            <h2>SETTINGS</h2>
 
-                <label for="tickPeriod">SPEED</label>
-                <input type="range" id="tickPeriod" min="0" max="1000" value="950" step="0.1"><br>
+            <label for="tickPeriod">SPEED</label>
+            <input type="range" id="tickPeriod" min="0" max="1000" value="950" step="0.1"><br>
 
-                <label for="persistent">PERSISTENT GRID</label>
-                <input type="checkbox" id="persistent"><br>
+            <label for="persistent">PERSISTENT GRID</label>
+            <input type="checkbox" id="persistent"><br>
 
-                <button type="button" onclick="reset()">RESET GRID</button>
-
-            </div>
+            <button type="button" onclick="reset()">RESET GRID</button>
 
         </div>
 

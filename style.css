@@ -125,6 +125,7 @@ main {
     background-color: #1f2227;
     overflow: hidden;
     font-size: 1.5rem;
+    visibility: hidden;
 }
 
 #code {

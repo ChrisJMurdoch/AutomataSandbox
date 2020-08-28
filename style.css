@@ -179,6 +179,8 @@ main {
     border-right: 2px solid #2B2F36;
     background-color: #1f2227;
     overflow: hidden;
+
+    z-index: 5;
 }
 @media (orientation: portrait) {
     #console {

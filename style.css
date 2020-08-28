@@ -142,6 +142,8 @@ main {
     background-color: #2B2F36;
     font-family: Consolas, Menlo, Monaco, "Lucida Console";
     font-size: 1.2rem;
+
+    overflow: hidden;
 }
 @media (orientation: portrait) {
     #code {

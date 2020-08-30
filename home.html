@@ -3,13 +3,21 @@
 <html>
 
 <head>
+    <!-- Metadata -->
+    <title>Automata Sandbox</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Online cellular-automata editor">
+    <meta name="keywords" content="Cellular, Automata, Sandbox">
+    <meta name="author" content="Chris Murdoch">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
     <!-- Code Mirror -->
     <script src="codemirror-5.56.0/lib/codemirror.js"></script>
     <link rel="stylesheet" href="codemirror-5.56.0/lib/codemirror.css">
     <script src="codemirror-5.56.0/mode/javascript/javascript.js"></script>
-
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 
     <!-- Styles and scripts -->
     <link rel="stylesheet" href="nebula.css">
@@ -20,23 +28,22 @@
 
 <body>
 
+    <!-- Navigation -->
     <nav>
         <div class="left">
             <a href="" class="logo">AUTOMATA SANDBOX</a>
         </div>
         <div class="left">
             <button type="button" onclick="loadSample('game_of_life')">Game of Life</button>
-            <button type="button" onclick="loadSample('falling_blocks')">Falling Blocks</button>
-            <button type="button" onclick="loadSample('falling_sand')">Falling Sand</button>
-        </div>
-        <div class="right">
-            <button type="button" onclick="toggle('helpbox')">?</button>
+            <button type="button" onclick="loadSample('falling_blocks')">Blocks</button>
+            <button type="button" onclick="loadSample('falling_sand')">Sand</button>
+            <button type="button" onclick="toggle('helpbox')" style="background-color: orange; color:#1f2227; padding-left: 0.4rem; padding-right: 0.4rem;">?</button>
         </div>
     </nav>
 
     <main>
 
-        <!-- HELP BOX -->
+        <!-- Helpbox -->
         <div id="helpbox" style="color: lightgrey;">
 
             <button class="right" onclick="toggle('helpbox')">X</button>
@@ -60,49 +67,41 @@
             <h3 style="color: white;">PERSISTENT GRID</h3>
             <p>
                 This option tells the grid whether or not to reset when switching examples.  When it's on, you 
-                can play around with different rulesets. Try: Game of Life > Falling Blocks > Falling Sand!
+                can play around with different rulesets. Try: Game of Life > Blocks > Sand!
             </p>
         </div>
 
-        <div class="leftside">
-
-            <!-- CODE BOX -->
-            <div id="code">
-                <span style="color: #CC7832; font-weight: bold;">function</span>
-                <span style="color: #A9B7C6; font-style: italic;">updateCell(neighbours)</span>
-                <span style="color: #A9B7C6;">{</span>
-                <div id="codearea"></div>
-                <span style="color: #A9B7C6;">}</span>
-            </div>
-
-            <!-- CONSOLE BOX -->
-            <div id="console">
-                CONSOLE
-                <hr>
-                <div id="consoleTray"></div>
-            </div>
-
+        <!-- Codebox -->
+        <div id="code">
+            <span style="color: #CC7832; font-weight: bold;">function</span>
+            <span style="color: #A9B7C6; font-style: italic;">updateCell(neighbours)</span>
+            <span style="color: #A9B7C6;">{</span>
+            <div id="codearea"></div>
+            <span style="color: #A9B7C6;">}</span>
         </div>
 
-        <div class="rightside">
+        <!-- Console -->
+        <div id="console">
+            CONSOLE
+            <hr>
+            <div id="consoleTray"></div>
+        </div>
 
-            <!-- DISPLAY BOX -->
-            <canvas id="canvas"></canvas>
+        <!-- Display -->
+        <canvas id="canvas"></canvas>
 
-            <!-- SETTINGS BOX -->
-            <div id="settings">
+        <!-- Settings -->
+        <div id="settings">
 
-                <h2>SETTINGS</h2>
+            <h2>SETTINGS</h2>
 
-                <label for="tickPeriod">SPEED</label>
-                <input type="range" id="tickPeriod" min="0" max="1000" value="950" step="0.1"><br>
+            <label for="tickPeriod">SPEED</label>
+            <input type="range" id="tickPeriod" min="0" max="1000" value="950" step="0.1"><br>
 
-                <label for="persistent">PERSISTENT GRID</label>
-                <input type="checkbox" id="persistent"><br>
+            <label for="persistent">PERSISTENT GRID</label>
+            <input type="checkbox" id="persistent"><br>
 
-                <button type="button" onclick="reset()">RESET GRID</button>
-
-            </div>
+            <button type="button" onclick="reset()">RESET GRID</button>
 
         </div>
 

@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 function toggle(id) {
     let style = document.getElementById(id).style;
-    style.visibility = style.visibility=="hidden" ? "visible" : "hidden";
+    style.visibility = style.visibility=="visible" ? "hidden" : "visible";
 }
 
 function init() {

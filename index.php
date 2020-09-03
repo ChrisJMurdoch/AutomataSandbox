@@ -1,4 +1,133 @@
+<!DOCTYPE html>
 
-<?php $db_connection = pg_connect("host=" . $_SERVER["DB_HOST"] . " dbname=" . $_SERVER["DB_NAME"] . " user=" . $_SERVER["DB_USER"] . " password=" . $_SERVER["DB_PASSWORD"] . ""); ?>
-<?php $users = pg_query($db_connection, "SELECT username FROM users"); ?>
-<?php include_once("home.html"); ?>
+<?php include "php/header.php" ?>
+
+<html>
+
+<head>
+    <!-- Metadata -->
+    <title>Automata Sandbox</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Online cellular-automata editor">
+    <meta name="keywords" content="Cellular, Automata, Sandbox">
+    <meta name="author" content="Chris Murdoch">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- Code Mirror -->
+    <script src="codemirror-5.56.0/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="codemirror-5.56.0/lib/codemirror.css">
+    <script src="codemirror-5.56.0/mode/javascript/javascript.js"></script>
+
+    <!-- Styles and scripts -->
+    <link rel="stylesheet" href="nebula.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="application/javascript" src="samples.js"></script>
+    <script type="application/javascript" src="automata.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="left">
+            <a href="" class="logo">AUTOMATA SANDBOX</a>
+        </div>
+        <div class="left">
+            <button type="button" onclick="loadSample('game_of_life')">Game of Life</button>
+            <button type="button" onclick="loadSample('falling_blocks')">Blocks</button>
+            <button type="button" onclick="loadSample('falling_sand')">Sand</button>
+            <button type="button" onclick="toggle('helpbox')" style="background-color: orange; color:#1f2227; padding-left: 0.4rem; padding-right: 0.4rem;">?</button>
+        </div>
+        <div class="right loginBar">
+            <?php
+                if ( $_SESSION["state"] == "logged_out" ) {
+                    include "php/login.php";
+
+                } else if ( $_SESSION["state"] == "logged_in" ) {
+                    include "php/logout.php";
+
+                } else if ( $_SESSION["state"] == "wrong_password" ) {
+                    include "php/login_p.php";
+
+                } else if ( $_SESSION["state"] == "wrong_user" ) {
+                    include "php/login_u.php";
+
+                } else {
+                    include "php/error.php";
+                }
+            ?>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- Helpbox -->
+        <div id="helpbox" style="color: lightgrey;">
+
+            <button class="right" onclick="toggle('helpbox')">X</button>
+
+            <h1 style="text-align: center; color: white;">HOW TO USE</h1>
+            <p>
+                Welcome to Automata Sandbox!  Here you'll find the tools to learn about and create your own 
+                cellular automata.
+            </p>
+
+            <h3 style="color: white;">CODE EXAMPLES</h3>
+            <p>
+                Click on the buttons at the top of the page to load example code into the editor and watch it 
+                come to life.  You can edit any of the examples and watch the world change in real time.
+            </p>
+            <p>
+                Any errors in your code will pause the execution and display in the console at the bottom of 
+                the screen.
+            </p>
+
+            <h3 style="color: white;">PERSISTENT GRID</h3>
+            <p>
+                This option tells the grid whether or not to reset when switching examples.  When it's on, you 
+                can play around with different rulesets. Try: Game of Life > Blocks > Sand!
+            </p>
+        </div>
+
+        <!-- Codebox -->
+        <div id="code">
+            <span style="color: #CC7832; font-weight: bold;">function</span>
+            <span style="color: #A9B7C6; font-style: italic;">updateCell(neighbours)</span>
+            <span style="color: #A9B7C6;">{</span>
+            <div id="codearea"></div>
+            <span style="color: #A9B7C6;">}</span>
+        </div>
+
+        <!-- Console -->
+        <div id="console">
+            CONSOLE
+            <hr>
+            <div id="consoleTray"></div>
+        </div>
+
+        <!-- Display -->
+        <canvas id="canvas"></canvas>
+
+        <!-- Settings -->
+        <div id="settings">
+
+            <h2>SETTINGS</h2>
+
+            <label for="tickPeriod">SPEED</label>
+            <input type="range" id="tickPeriod" min="0" max="1000" value="950" step="0.1"><br>
+
+            <label for="persistent">PERSISTENT GRID</label>
+            <input type="checkbox" id="persistent"><br>
+
+            <button type="button" onclick="reset()">RESET GRID</button>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

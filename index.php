@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 
-<?php session_start(); ?>
+<?php
+    session_start();
+    if ( !isset($_SESSION["state"]) ) {
+        $_SESSION["state"] = "logged_out";
+    }
+?>
 
 <html>
 

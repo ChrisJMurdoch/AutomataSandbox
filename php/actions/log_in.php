@@ -12,10 +12,10 @@
     );
 
     // Validate username
-    if ( isset($_POST["username"]) &&  $_POST["username"] == "Chris" ) {
+    if ( pg_num_rows( pg_query( "SELECT username FROM users WHERE username = '" . pg_escape_string($_POST["username"]) . "'" ) ) >= 1 ) {
 
         // Validate password
-        if ( isset($_POST["password"]) &&  $_POST["password"] == "admin" ) {
+        if ( $_POST["password"] == pg_fetch_result( pg_query( "SELECT hash FROM users WHERE username = '" . pg_escape_string($_POST["username"]) . "'" ), 0, "hash" ) ) {
             $_SESSION["state"] = "logged_in";
             $_SESSION["username"] = $_POST["username"];
         } else {

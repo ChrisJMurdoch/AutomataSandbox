@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<?php include "php/header.php" ?>
+<?php session_start(); ?>
 
 <html>
 
@@ -42,23 +42,7 @@
             <button type="button" onclick="toggle('helpbox')" style="background-color: orange; color:#1f2227; padding-left: 0.4rem; padding-right: 0.4rem;">?</button>
         </div>
         <div class="right loginBar">
-            <?php
-                if ( $_SESSION["state"] == "logged_out" ) {
-                    include "php/login.php";
-
-                } else if ( $_SESSION["state"] == "logged_in" ) {
-                    include "php/logout.php";
-
-                } else if ( $_SESSION["state"] == "wrong_password" ) {
-                    include "php/login_p.php";
-
-                } else if ( $_SESSION["state"] == "wrong_user" ) {
-                    include "php/login_u.php";
-
-                } else {
-                    include "php/error.php";
-                }
-            ?>
+            <?php include "php/states/" . $_SESSION["state"] . ".php"; ?>
         </div>
     </nav>
 

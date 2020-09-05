@@ -37,16 +37,15 @@
 
     <!-- Navigation -->
     <nav>
-        <div class="left">
-            <a href="" class="logo">AUTOMATA SANDBOX</a>
-        </div>
+        <h1 class="left">AUTOMATA SANDBOX</h1>
+        <div class="left gap"></div>
         <div class="left">
             <button type="button" onclick="loadSample('game_of_life')">Game of Life</button>
             <button type="button" onclick="loadSample('falling_blocks')">Blocks</button>
             <button type="button" onclick="loadSample('falling_sand')">Sand</button>
             <button type="button" onclick="toggle('helpbox')" style="background-color: orange; color:#1f2227; padding-left: 0.4rem; padding-right: 0.4rem;">?</button>
         </div>
-        <div class="right loginBar">
+        <div class="right">
             <?php include "php/states/" . $_SESSION["state"] . ".php"; ?>
         </div>
     </nav>
@@ -106,10 +105,10 @@
             <h2>SETTINGS</h2>
 
             <label for="tickPeriod">SPEED</label>
-            <input type="range" id="tickPeriod" min="0" max="1000" value="950" step="0.1"><br>
+            <input type="range" id="tickPeriod" min="0" max="1000" value="950" step="0.1"><br><br>
 
             <label for="persistent">PERSISTENT GRID</label>
-            <input type="checkbox" id="persistent"><br>
+            <input type="checkbox" id="persistent"><br><br>
 
             <button type="button" onclick="reset()">RESET GRID</button>
 

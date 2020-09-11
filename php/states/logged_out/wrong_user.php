@@ -7,3 +7,5 @@
         <input type="submit" value="LOGIN">
     </form>
 <html>
+
+<?php $_SESSION["state"] = "logged_out/ok"; ?>

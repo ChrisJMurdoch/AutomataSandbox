@@ -16,14 +16,14 @@
 
         // Validate password
         if ( $_POST["password"] == pg_fetch_result( pg_query( "SELECT hash FROM users WHERE username = '" . pg_escape_string($_POST["username"]) . "'" ), 0, "hash" ) ) {
-            $_SESSION["state"] = "logged_in";
+            $_SESSION["state"] = "logged_in/ok";
             $_SESSION["username"] = $_POST["username"];
         } else {
-            $_SESSION["state"] = "logged_out_wp"; // Wrong password
+            $_SESSION["state"] = "logged_out/wrong_password"; // Wrong password
         }
 
     } else {
-        $_SESSION["state"] = "logged_out_wu"; // Wrong username
+        $_SESSION["state"] = "logged_out/wrong_user"; // Wrong username
     }
 
     // Return to root

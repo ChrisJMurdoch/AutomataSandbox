@@ -3,7 +3,7 @@
 <?php
     session_start();
     if ( !isset($_SESSION["state"]) ) {
-        $_SESSION["state"] = "logged_out";
+        $_SESSION["state"] = "logged_out/ok";
     }
 ?>
 
@@ -46,7 +46,15 @@
             <button type="button" onclick="toggle('helpbox')" style="background-color: orange; color:#1f2227; padding-left: 0.4rem; padding-right: 0.4rem;">?</button>
         </div>
         <div class="right">
-            <?php include "php/states/" . $_SESSION["state"] . ".php"; ?>
+            <?php
+            $state_path = "php/states/" . $_SESSION["state"] . ".php";
+            if ( file_exists($state_path) ) {
+                include $state_path;
+            } else {
+                include "php/states/error.php";
+                $_SESSION["state"] = "logged_out/ok";
+            }
+            ?>
         </div>
     </nav>
 
